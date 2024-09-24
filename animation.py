@@ -1,11 +1,11 @@
 import sys
 import time
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 
 def loading_animation(duration=5):
     spinner = ['|', '/', '-', '\\']
     end_time = time.time() + duration
-    
+    sys.stdout = sys.__stdout__
     # Text to display at the start
     sys.stdout.write(Fore.CYAN + Style.BRIGHT + "Upgrading WordPress..." + Style.RESET_ALL + "\n")
     sys.stdout.flush()
@@ -25,6 +25,7 @@ def welcome_animation(duration=3):
     welcome_text = "Welcome to GitWP AutoUp!"
     num_steps = 20  # Number of steps for the text to move across the screen
     delay = duration / num_steps  # Calculate delay based on the duration and steps
+    
 
     for step in range(num_steps):
         # Calculate spaces to move the text
@@ -32,6 +33,7 @@ def welcome_animation(duration=3):
         sys.stdout.write(Fore.CYAN + Style.BRIGHT + f'\r{spaces}{welcome_text}' + Style.RESET_ALL)
         sys.stdout.flush()
         time.sleep(delay)
+        sys.stdout = sys.__stdout__
 
     # Hold the final position for a moment
     time.sleep(1)
